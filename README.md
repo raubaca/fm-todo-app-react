@@ -38,8 +38,8 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Frontend Mentor](https://www.frontendmentor.io/solutions/responsive-todo-app-T23xMFcAFN)
+- Live Site URL: [Vercel](https://fm-todo-app-react.vercel.app/)
 
 ## My process
 
@@ -58,6 +58,7 @@ Users should be able to:
 
 - [Easy Drag and Drop in React](https://medium.com/nmc-techblog/easy-drag-and-drop-in-react-22778b30ba37) - This helped me with the implementation of React DnD.
 - [Create a gradient border in CSS](https://nikitahl.com/gradient-border-css) - On this post I found a solution for the checkbox gradient border.
+- [How to deploy React App to GitHub Pages](https://dev.to/yuribenjamin/how-to-deploy-react-app-in-github-pages-2a1f) - Here I found how to deploy React to GitHub Pages
 
 ## Author
 
