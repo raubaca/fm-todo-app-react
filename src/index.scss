@@ -1,0 +1,226 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@400;700&display=swap');
+
+/* Values */
+
+:root {
+  --bright-blue: hsl(220, 98%, 61%);
+  --x-light-grayish-blue: hsl(236, 33%, 92%);
+  --light-grayish-blue: hsl(233, 11%, 84%);
+  --dark-grayish-blue: hsl(236, 9%, 61%);
+  --x-dark-grayish-blue: hsl(235, 19%, 35%);
+  --x-dark-desaturated-blue: hsl(235, 24%, 19%);
+  --x-dark-blue: hsl(235, 21%, 11%);
+
+  --bg-mobile: url(assets/bg-mobile-dark.jpg) no-repeat center top / cover;
+  --bg-desktop: url(assets/bg-desktop-dark.jpg) no-repeat center top / cover;
+
+  --check-size: 2rem;
+
+  --color-bg-body: var(--x-dark-blue);
+  --color-bg-card: var(--x-dark-desaturated-blue);
+
+  --color-text: var(--dark-grayish-blue);
+  --color-text-accent: var(--bright-blue);
+  --color-text-light: var(--light-grayish-blue);
+  --color-text-muted: var(--x-dark-grayish-blue);
+  --color-text-title: var(--x-light-grayish-blue);
+
+  --gradient-bg: linear-gradient(hsl(192, 100%, 67%), hsl(280, 87%, 65%));
+  --height-tab: 4.25em;
+}
+
+/* Reset */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+html {
+  font: 62.5% sans-serif;
+}
+h1 {
+  margin: 0;
+}
+ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+button,
+input {
+  appearance: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+  width: auto;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  line-height: normal;
+  outline: 0;
+}
+button::-moz-focus-inner {
+  border: 0;
+}
+body {
+  margin: 0;
+  font: 1.2rem 'Josefin Sans', sans-serif;
+  background: var(--color-bg-body);
+  color: var(--color-text);
+}
+
+/* Layout */
+
+.todo-app {
+  min-height: 100vh;
+  display: grid;
+  grid-template-columns: minmax(auto, 540px);
+  justify-content: center;
+  align-content: start;
+  gap: 1.6rem;
+  padding: 2em;
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 200px;
+    z-index: -1;
+    background: var(--bg-mobile);
+  }
+}
+.row {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+.web {
+  display: none;
+}
+
+/* UI */
+
+.btn {
+  font-weight: 700;
+  cursor: pointer;
+  &:hover {
+    color: var(--color-text-light);
+  }
+  &.active {
+    color: var(--color-text-accent);
+  }
+  &__img {
+    width: 1em;
+  }
+}
+.card {
+  background: var(--color-bg-card);
+  border-radius: 0.5em;
+  overflow: hidden;
+  box-shadow: 0px 3rem 3rem 0rem rgba(0, 0, 0, 0.26);
+}
+.checkbox {
+  width: var(--check-size);
+  height: var(--check-size);
+  border-radius: 50%;
+  border: 1px solid var(--color-text-muted);
+  &:checked {
+    background: url(./assets/icon-check.svg) no-repeat center / 1rem,
+      var(--gradient-bg);
+  }
+}
+
+/* Content */
+
+.header {
+  justify-content: space-between;
+  margin: 2em 0 1.5em;
+  h1 {
+    color: var(--color-text-title);
+    text-transform: uppercase;
+    letter-spacing: 0.5em;
+  }
+  .btn__img {
+    width: 1.5em;
+  }
+}
+.form {
+  padding: 0 1.5em;
+  &::before {
+    @extend .checkbox;
+    content: '';
+  }
+  input {
+    flex: 1;
+    height: var(--height-tab);
+  }
+}
+.todos {
+  li {
+    height: var(--height-tab);
+    padding: 0 1.5em;
+    border-bottom: 1px solid var(--color-text-muted);
+  }
+}
+.todo {
+  .checkbox,
+  label {
+    color: var(--color-text-light);
+    cursor: pointer;
+  }
+  :checked + label {
+    color: var(--color-text-muted);
+    text-decoration: line-through;
+  }
+  .btn {
+    display: none;
+    margin-left: auto;
+    margin-top: 0.25rem;
+  }
+  &:hover .btn {
+    display: block;
+  }
+}
+.items-left {
+  height: var(--height-tab);
+  padding: 0 1.5em;
+  justify-content: space-between;
+}
+.filters {
+  gap: 1.5em;
+  height: var(--height-tab);
+  justify-content: center;
+  padding: 0 1.5em;
+  button {
+    font-size: 1.4rem;
+  }
+}
+
+@media (min-width: 600px) {
+  body {
+    --check-size: 2.4rem;
+    --height-tab: 3.5em;
+    font-size: 1.8rem;
+  }
+  .mobile {
+    display: none;
+  }
+  .web {
+    display: flex;
+  }
+  .todo-app {
+    gap: 2.5rem;
+    &::before {
+      height: 300px;
+      background: var(--bg-desktop);
+    }
+  }
+  .header {
+    margin-bottom: 1em;
+  }
+  .items-left * {
+    font-size: 1.4rem;
+  }
+}
