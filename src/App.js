@@ -1,5 +1,7 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 
 import Header from './components/Header';
 import Form from './components/Form';
@@ -47,20 +49,37 @@ function App() {
     setFilter('All');
   };
 
+  const moveTodoHandler = useCallback(
+    (dragIndex, hoverIndex) => {
+      const dragItem = todos[dragIndex];
+      const hoverItem = todos[hoverIndex];
+      setTodos((prev) => {
+        const updatedTodos = [...prev];
+        updatedTodos[dragIndex] = hoverItem;
+        updatedTodos[hoverIndex] = dragItem;
+        return updatedTodos;
+      });
+    },
+    [todos]
+  );
+
   return (
-    <div className="todo-app">
-      <Header theme={theme} onToggleTheme={setTheme} />
-      <Form onAddTodo={addTodoHandler} />
-      <Todos
-        todos={todos}
-        filter={filter}
-        onFilter={setFilter}
-        onToggleTodo={toggleTodoHandler}
-        onDeleteTodo={deleteTodoHandler}
-        onClearCompleted={clearCompletedHandler}
-      />
-      <Footer />
-    </div>
+    <DndProvider backend={HTML5Backend}>
+      <div className="todo-app">
+        <Header theme={theme} onToggleTheme={setTheme} />
+        <Form onAddTodo={addTodoHandler} />
+        <Todos
+          todos={todos}
+          filter={filter}
+          onFilter={setFilter}
+          onToggleTodo={toggleTodoHandler}
+          onDeleteTodo={deleteTodoHandler}
+          onClearCompleted={clearCompletedHandler}
+          onMoveTodo={moveTodoHandler}
+        />
+        <Footer />
+      </div>
+    </DndProvider>
   );
 }
 

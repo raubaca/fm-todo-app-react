@@ -16,16 +16,16 @@
 
   --check-size: 2rem;
   --height-tab: 4.25em;
+  --color-text-accent: var(--bright-blue);
 
   --bg-mobile: url(assets/bg-mobile-dark.jpg) no-repeat center top / cover;
   --bg-desktop: url(assets/bg-desktop-dark.jpg) no-repeat center top / cover;
   --color-bg-body: var(--x-dark-blue);
   --color-bg-card: var(--x-dark-desaturated-blue);
   --color-border: var(--x-dark-grayish-blue);
-  --color-text: var(--light-grayish-blue);
-  --color-text-accent: var(--bright-blue);
-  --color-text-light: var(--x-light-grayish-blue);
-  --color-text-muted: var(--dark-grayish-blue);
+  --color-text: var(--x-dark-grayish-blue);
+  --color-text-hover: var(--x-light-grayish-blue);
+  --color-text-label: var(--light-grayish-blue);
   --color-text-title: var(--x-light-gray);
 }
 
@@ -35,9 +35,10 @@
   --color-border: var(--light-grayish-blue);
   --color-bg-body: var(--x-light-grayish-blue);
   --color-bg-card: var(--x-light-gray);
+
   --color-text: var(--dark-grayish-blue);
-  --color-text-light: var(--x-dark-grayish-blue);
-  --color-text-muted: var(--light-grayish-blue);
+  --color-text-hover: var(--x-dark-grayish-blue);
+  --color-text-label: var(--x-dark-grayish-blue);
 }
 
 // Reset
@@ -87,7 +88,7 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(auto, 540px);
-  grid-template-rows: repeat(3, auto) 1fr;
+  grid-template-rows: repeat(4, auto) 1fr;
   justify-content: center;
   align-content: start;
   gap: 1.6rem;
@@ -118,10 +119,7 @@ body {
   font-weight: 700;
   cursor: pointer;
   &:hover {
-    color: var(--color-text-light);
-  }
-  &.active {
-    color: var(--color-text-accent);
+    color: var(--color-text-hover);
   }
   &__img {
     width: 1em;
@@ -138,9 +136,16 @@ body {
   height: var(--check-size);
   border-radius: 50%;
   border: 1px solid var(--color-border);
+  &:hover {
+    background: linear-gradient(var(--color-bg-card), var(--color-bg-card))
+        padding-box,
+      var(--check-bg) border-box;
+    border: 1px solid transparent;
+  }
   &:checked {
     background: url(./assets/icon-check.svg) no-repeat center / 1rem,
-      var(--check-bg);
+      var(--check-bg) border-box;
+    border: 1px solid transparent;
   }
 }
 
@@ -161,10 +166,14 @@ body {
 .form {
   padding: 0 1.5em;
   &::before {
-    @extend .checkbox;
     content: '';
+    width: var(--check-size);
+    height: var(--check-size);
+    border-radius: 50%;
+    border: 1px solid var(--color-border);
   }
   input {
+    color: var(--color-text-label);
     flex: 1;
     height: var(--height-tab);
   }
@@ -182,11 +191,11 @@ body {
 .todo {
   .checkbox,
   label {
-    color: var(--color-text-light);
+    color: var(--color-text-label);
     cursor: pointer;
   }
   :checked + label {
-    color: var(--color-text-muted);
+    color: var(--color-text);
     text-decoration: line-through;
   }
   .btn {
@@ -197,6 +206,12 @@ body {
   &:hover .btn {
     display: block;
   }
+}
+.drag-copy {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin: 2em 0;
+  text-align: center;
 }
 .items-left {
   height: var(--height-tab);
@@ -222,7 +237,7 @@ body {
   text-align: center;
 }
 .attribution a {
-  color: hsl(228, 45%, 44%);
+  color: var(--color-text-accent);
 }
 
 // Responsive

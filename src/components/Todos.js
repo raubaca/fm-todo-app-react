@@ -11,6 +11,7 @@ const Todos = (props) => {
     onToggleTodo,
     onDeleteTodo,
     onClearCompleted,
+    onMoveTodo,
   } = props;
 
   const itemsLeft = todos.filter(FILTERS['Active']).length;
@@ -19,12 +20,14 @@ const Todos = (props) => {
     <>
       <section className="card">
         <ul className="todos">
-          {todos.filter(FILTERS[filter]).map((todo) => (
+          {todos.filter(FILTERS[filter]).map((todo, index) => (
             <Todo
               key={todo.id}
               todo={todo}
               onToggleTodo={onToggleTodo}
               onDeleteTodo={onDeleteTodo}
+              index={index}
+              onMoveTodo={onMoveTodo}
             />
           ))}
         </ul>
@@ -41,6 +44,7 @@ const Todos = (props) => {
       <section className="card filters row mobile">
         <Filters active={filter} setFilter={onFilter} />
       </section>
+      <p className="drag-copy">Drag and drop to reorder list</p>
     </>
   );
 };
