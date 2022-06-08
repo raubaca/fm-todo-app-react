@@ -78,6 +78,8 @@ body {
   display: grid;
   -ms-grid-columns: minmax(auto, 540px);
       grid-template-columns: minmax(auto, 540px);
+  -ms-grid-rows: (auto)[3] 1fr;
+      grid-template-rows: repeat(3, auto) 1fr;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -188,6 +190,10 @@ body {
   border-bottom: 1px solid var(--color-text-muted);
 }
 
+.todos label {
+  margin-top: 0.25rem;
+}
+
 .todo .checkbox, .todo .form::before,
 .todo label {
   color: var(--color-text-light);
@@ -228,6 +234,21 @@ body {
 
 .filters button {
   font-size: 1.4rem;
+}
+
+.filters button[aria-pressed='true'] {
+  color: var(--color-text-accent);
+}
+
+.attribution {
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  font-size: 11px;
+  text-align: center;
+}
+
+.attribution a {
+  color: #3e52a3;
 }
 
 @media (min-width: 600px) {

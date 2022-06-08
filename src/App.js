@@ -1,87 +1,60 @@
-import iconSun from './assets/icon-sun.svg';
-import iconCross from './assets/icon-cross.svg';
+import { useState } from 'react';
+import { nanoid } from 'nanoid';
+
+import Header from './components/Header';
+import Form from './components/Form';
+import Todos from './components/Todos';
+import Footer from './components/Footer';
+
+import { FILTERS } from './utils/constants';
 
 function App() {
+  const [todos, setTodos] = useState([]);
+  const [filter, setFilter] = useState('All');
+
+  const addTodoHandler = (text) => {
+    const newTodo = {
+      id: 'todo-' + nanoid(),
+      text,
+      completed: false,
+    };
+    setTodos((prev) => [...prev, newTodo]);
+    setFilter('All');
+  };
+
+  const toggleTodoHandler = (id) => {
+    setTodos((prev) =>
+      prev.map((todo) => {
+        if (id === todo.id) {
+          return { ...todo, completed: !todo.completed };
+        }
+        return todo;
+      })
+    );
+  };
+
+  const deleteTodoHandler = (id) => {
+    setTodos((prev) => prev.filter((todo) => todo.id !== id));
+  };
+
+  const clearCompletedHandler = () => {
+    setTodos((prev) => prev.filter(FILTERS['Active']));
+    setFilter('All');
+  };
+
   return (
     <div className="todo-app">
-      <header className="header row">
-        <h1>Todo</h1>
-        <button className="btn">
-          <img src={iconSun} alt="Light" className="btn__img" />
-        </button>
-      </header>
-
-      <form className="card form row">
-        <input
-          type="text"
-          name="text"
-          id="new-todo-input"
-          placeholder="Create a new todo."
-          autoComplete="off"
-        />
-      </form>
-
-      <div className="card">
-        <ul className="todos">
-          <li className="row todo">
-            <input
-              type="checkbox"
-              name="todo1"
-              id="todo1"
-              className="checkbox"
-            />
-            <label htmlFor="todo1" className="todo-label">
-              Lorem ipsum dolor sit amet.
-            </label>
-            <button type="button" className="btn">
-              <img src={iconCross} alt="Delete" className="btn__img" />
-            </button>
-          </li>
-          <li className="row todo">
-            <input
-              type="checkbox"
-              name="todo2"
-              id="todo2"
-              className="checkbox"
-            />
-            <label htmlFor="todo2" className="todo-label">
-              Lorem ipsum dolor sit amet.
-            </label>
-            <button type="button" className="btn">
-              <img src={iconCross} alt="Delete" className="btn__img" />
-            </button>
-          </li>
-        </ul>
-        <div className="row items-left">
-          <span>5 item(s) left</span>
-          <div className="filters web row">
-            <button type="button" className="btn" aria-pressed="true">
-              All
-            </button>
-            <button type="button" className="btn" aria-pressed="false">
-              Active
-            </button>
-            <button type="button" className="btn" aria-pressed="false">
-              Completed
-            </button>
-          </div>
-          <button type="button" className="btn">
-            Clear Completed
-          </button>
-        </div>
-      </div>
-
-      <div className="card filters mobile row">
-        <button type="button" className="btn" aria-pressed="true">
-          All
-        </button>
-        <button type="button" className="btn" aria-pressed="false">
-          Active
-        </button>
-        <button type="button" className="btn" aria-pressed="false">
-          Completed
-        </button>
-      </div>
+      <Header />
+      <Form onAddTodo={addTodoHandler} />
+      <Todos
+        todos={todos}
+        filter={filter}
+        onFilter={setFilter}
+        onToggleTodo={toggleTodoHandler}
+        onDeleteTodo={deleteTodoHandler}
+        onClearCompleted={clearCompletedHandler}
+      />
+      <Footer />
     </div>
   );
 }

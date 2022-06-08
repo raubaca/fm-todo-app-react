@@ -76,6 +76,7 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(auto, 540px);
+  grid-template-rows: repeat(3, auto) 1fr;
   justify-content: center;
   align-content: start;
   gap: 1.6rem;
@@ -163,6 +164,9 @@ body {
     padding: 0 1.5em;
     border-bottom: 1px solid var(--color-text-muted);
   }
+  label {
+    margin-top: 0.25rem;
+  }
 }
 .todo {
   .checkbox,
@@ -195,7 +199,19 @@ body {
   padding: 0 1.5em;
   button {
     font-size: 1.4rem;
+    &[aria-pressed='true'] {
+      color: var(--color-text-accent);
+    }
   }
+}
+
+.attribution {
+  align-self: flex-end;
+  font-size: 11px;
+  text-align: center;
+}
+.attribution a {
+  color: hsl(228, 45%, 44%);
 }
 
 @media (min-width: 600px) {
