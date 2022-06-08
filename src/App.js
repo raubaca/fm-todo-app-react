@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { nanoid } from 'nanoid';
 
 import Header from './components/Header';
@@ -9,8 +9,13 @@ import Footer from './components/Footer';
 import { FILTERS } from './utils/constants';
 
 function App() {
+  const [theme, setTheme] = useState('light');
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState('All');
+
+  useEffect(() => {
+    document.documentElement.setAttribute('data-theme', theme);
+  }, [theme]);
 
   const addTodoHandler = (text) => {
     const newTodo = {
@@ -44,7 +49,7 @@ function App() {
 
   return (
     <div className="todo-app">
-      <Header />
+      <Header theme={theme} onToggleTheme={setTheme} />
       <Form onAddTodo={addTodoHandler} />
       <Todos
         todos={todos}
