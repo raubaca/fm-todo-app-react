@@ -88,8 +88,8 @@ body {
   display: grid;
   -ms-grid-columns: minmax(auto, 540px);
       grid-template-columns: minmax(auto, 540px);
-  -ms-grid-rows: (auto)[4] 1fr;
-      grid-template-rows: repeat(4, auto) 1fr;
+  -ms-grid-rows: (auto)[3] 1fr;
+      grid-template-rows: repeat(3, auto) 1fr;
   -webkit-box-pack: center;
       -ms-flex-pack: center;
           justify-content: center;
@@ -129,10 +129,6 @@ body {
   cursor: pointer;
 }
 
-.btn:hover {
-  color: var(--color-text-hover);
-}
-
 .btn__img {
   width: 1em;
 }
@@ -152,12 +148,6 @@ body {
   border: 1px solid var(--color-border);
 }
 
-.checkbox:hover {
-  background: -webkit-gradient(linear, left top, left bottom, from(var(--color-bg-card)), to(var(--color-bg-card))) padding-box, var(--check-bg) border-box;
-  background: linear-gradient(var(--color-bg-card), var(--color-bg-card)) padding-box, var(--check-bg) border-box;
-  border: 1px solid transparent;
-}
-
 .checkbox:checked {
   background: url(./assets/icon-check.svg) no-repeat center/1rem, var(--check-bg) border-box;
   border: 1px solid transparent;
@@ -174,6 +164,11 @@ body {
   color: var(--color-text-title);
   text-transform: uppercase;
   letter-spacing: 0.5em;
+}
+
+.header .btn {
+  padding: 1em;
+  margin: -1em;
 }
 
 .header .btn__img {
@@ -200,6 +195,12 @@ body {
   height: var(--height-tab);
 }
 
+.main {
+  display: -ms-grid;
+  display: grid;
+  gap: 1.6rem;
+}
+
 .todos li {
   height: var(--height-tab);
   padding: 0 1.5em;
@@ -210,8 +211,12 @@ body {
   margin-top: 0.25rem;
 }
 
-.todo .checkbox,
+.todo .checkbox {
+  cursor: pointer;
+}
+
 .todo label {
+  line-height: 4.8rem;
   color: var(--color-text-label);
   cursor: pointer;
 }
@@ -221,14 +226,9 @@ body {
   text-decoration: line-through;
 }
 
-.todo .btn {
-  display: none;
-  margin-left: auto;
-  margin-top: 0.25rem;
-}
-
-.todo:hover .btn {
-  display: block;
+.todo .btn--delete {
+  padding: 1em;
+  margin: 0.25rem -1em 0 auto;
 }
 
 .drag-copy {
@@ -274,6 +274,23 @@ body {
   color: var(--color-text-accent);
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    color: var(--color-text-hover);
+  }
+  .checkbox:not(:checked):hover {
+    background: -webkit-gradient(linear, left top, left bottom, from(var(--color-bg-card)), to(var(--color-bg-card))) padding-box, var(--check-bg) border-box;
+    background: linear-gradient(var(--color-bg-card), var(--color-bg-card)) padding-box, var(--check-bg) border-box;
+    border: 1px solid transparent;
+  }
+  .todo .btn--delete {
+    display: none;
+  }
+  .todo:hover .btn--delete {
+    display: block;
+  }
+}
+
 @media (min-width: 600px) {
   body {
     --check-size: 2.4rem;
@@ -300,6 +317,13 @@ body {
   }
   .header h1 {
     line-height: 1.5;
+  }
+  .header .btn {
+    padding: 0;
+    margin: 0;
+  }
+  .main {
+    gap: 2.5rem;
   }
   .items-left * {
     font-size: 1.4rem;

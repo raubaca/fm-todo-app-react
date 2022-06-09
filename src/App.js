@@ -11,8 +11,12 @@ import Footer from './components/Footer';
 import { FILTERS } from './utils/constants';
 
 function App() {
-  const [theme, setTheme] = useState('light');
-  const [todos, setTodos] = useState([]);
+  const [theme, setTheme] = useState('dark');
+  const [todos, setTodos] = useState([
+    { id: 2, text: 'Eat lunch', completed: false },
+    { id: 3, text: 'Do exercise', completed: false },
+    { id: 1, text: 'Wake up', completed: true },
+  ]);
   const [filter, setFilter] = useState('All');
 
   useEffect(() => {

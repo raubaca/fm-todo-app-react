@@ -88,7 +88,7 @@ body {
   min-height: 100vh;
   display: grid;
   grid-template-columns: minmax(auto, 540px);
-  grid-template-rows: repeat(4, auto) 1fr;
+  grid-template-rows: repeat(3, auto) 1fr;
   justify-content: center;
   align-content: start;
   gap: 1.6rem;
@@ -118,9 +118,6 @@ body {
 .btn {
   font-weight: 700;
   cursor: pointer;
-  &:hover {
-    color: var(--color-text-hover);
-  }
   &__img {
     width: 1em;
   }
@@ -136,12 +133,6 @@ body {
   height: var(--check-size);
   border-radius: 50%;
   border: 1px solid var(--color-border);
-  &:hover {
-    background: linear-gradient(var(--color-bg-card), var(--color-bg-card))
-        padding-box,
-      var(--check-bg) border-box;
-    border: 1px solid transparent;
-  }
   &:checked {
     background: url(./assets/icon-check.svg) no-repeat center / 1rem,
       var(--check-bg) border-box;
@@ -158,6 +149,10 @@ body {
     color: var(--color-text-title);
     text-transform: uppercase;
     letter-spacing: 0.5em;
+  }
+  .btn {
+    padding: 1em;
+    margin: -1em;
   }
   .btn__img {
     width: 1.5em;
@@ -178,6 +173,10 @@ body {
     height: var(--height-tab);
   }
 }
+.main {
+  display: grid;
+  gap: 1.6rem;
+}
 .todos {
   li {
     height: var(--height-tab);
@@ -189,8 +188,11 @@ body {
   }
 }
 .todo {
-  .checkbox,
+  .checkbox {
+    cursor: pointer;
+  }
   label {
+    line-height: 4.8rem;
     color: var(--color-text-label);
     cursor: pointer;
   }
@@ -198,13 +200,9 @@ body {
     color: var(--color-text);
     text-decoration: line-through;
   }
-  .btn {
-    display: none;
-    margin-left: auto;
-    margin-top: 0.25rem;
-  }
-  &:hover .btn {
-    display: block;
+  .btn--delete {
+    padding: 1em;
+    margin: 0.25rem -1em 0 auto;
   }
 }
 .drag-copy {
@@ -240,6 +238,26 @@ body {
   color: var(--color-text-accent);
 }
 
+@media (hover: hover) and (pointer: fine) {
+  .btn:hover {
+    color: var(--color-text-hover);
+  }
+  .checkbox:not(:checked):hover {
+    background: linear-gradient(var(--color-bg-card), var(--color-bg-card))
+        padding-box,
+      var(--check-bg) border-box;
+    border: 1px solid transparent;
+  }
+  .todo {
+    .btn--delete {
+      display: none;
+    }
+    &:hover .btn--delete {
+      display: block;
+    }
+  }
+}
+
 // Responsive
 
 @media (min-width: 600px) {
@@ -266,6 +284,13 @@ body {
     h1 {
       line-height: 1.5;
     }
+    .btn {
+      padding: 0;
+      margin: 0;
+    }
+  }
+  .main {
+    gap: 2.5rem;
   }
   .items-left * {
     font-size: 1.4rem;

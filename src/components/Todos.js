@@ -17,8 +17,8 @@ const Todos = (props) => {
   const itemsLeft = todos.filter(FILTERS['Active']).length;
 
   return (
-    <>
-      <section className="card">
+    <main className="main">
+      <div className="card">
         <ul className="todos">
           {todos.filter(FILTERS[filter]).map((todo, index) => (
             <Todo
@@ -40,12 +40,12 @@ const Todos = (props) => {
             Clear Completed
           </button>
         </div>
-      </section>
-      <section className="card filters row mobile">
+      </div>
+      <div className="card filters row mobile">
         <Filters active={filter} setFilter={onFilter} />
-      </section>
+      </div>
       <p className="drag-copy">Drag and drop to reorder list</p>
-    </>
+    </main>
   );
 };
 

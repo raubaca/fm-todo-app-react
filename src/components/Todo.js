@@ -24,9 +24,7 @@ const Todo = (props) => {
         (hoverBoundingRect.bottom - hoverBoundingRect.top) / 2;
       const hoverActualY = monitor.getClientOffset().y - hoverBoundingRect.top;
 
-      // if dragging down, continue only when hover is smaller than middle Y
       if (dragIndex < hoverIndex && hoverActualY < hoverMiddleY) return;
-      // if dragging up, continue only when hover is bigger than middle Y
       if (dragIndex > hoverIndex && hoverActualY > hoverMiddleY) return;
 
       onMoveTodo(dragIndex, hoverIndex);
@@ -52,7 +50,7 @@ const Todo = (props) => {
       </label>
       <button
         type="button"
-        className="btn"
+        className="btn btn--delete"
         onClick={() => props.onDeleteTodo(id)}
       >
         <img src={iconCross} alt="Delete" className="btn__img" />

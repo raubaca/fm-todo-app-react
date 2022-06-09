@@ -12,15 +12,17 @@ const Form = (props) => {
   };
 
   return (
-    <form onSubmit={submitHandler} className="card form row">
-      <input
-        ref={inputRef}
-        type="text"
-        name="text"
-        placeholder="Create a new todo."
-        autoComplete="off"
-      />
-    </form>
+    <div className="card">
+      <form onSubmit={submitHandler} className="form row">
+        <input
+          ref={inputRef}
+          type="text"
+          name="text"
+          placeholder="Create a new todo."
+          autoComplete="off"
+        />
+      </form>
+    </div>
   );
 };
 
