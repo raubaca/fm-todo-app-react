@@ -12,7 +12,7 @@ const Form = (props) => {
   };
 
   return (
-    <div className="card">
+    <nav className="card">
       <form onSubmit={submitHandler} className="form row">
         <input
           ref={inputRef}
@@ -22,7 +22,7 @@ const Form = (props) => {
           autoComplete="off"
         />
       </form>
-    </div>
+    </nav>
   );
 };
 
